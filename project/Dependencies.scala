@@ -2,6 +2,7 @@ import sbt.*
 
 object Dependencies {
   val flywayVersion            = "9.16.0"
+  val ironVersion              = "2.4.0"
   val javaJwtVersion           = "4.4.0"
   val javaMailVersion          = "1.6.2"
   val logbackVersion           = "1.4.7"
@@ -20,6 +21,11 @@ object Dependencies {
 
   val flyway: List[ModuleID] = List(
     "org.flywaydb" % "flyway-core" % flywayVersion
+  )
+
+  val iron: List[ModuleID] = List(
+    "io.github.iltotore" %% "iron-zio"      % ironVersion,
+    "io.github.iltotore" %% "iron-zio-json" % ironVersion
   )
 
   val `java-jwt`: List[ModuleID] = List(
@@ -52,11 +58,12 @@ object Dependencies {
 
   val tapir: List[ModuleID] = List(
     "com.softwaremill.sttp.tapir" %% "tapir-sttp-client"       % tapirVersion,
+    "com.softwaremill.sttp.tapir" %% "tapir-iron"              % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-json-zio"          % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-zio"               % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-zio-http-server"   % tapirVersion,
     "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % tapirVersion,
-    "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server"  % tapirVersion % "test"
+    "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server"  % tapirVersion % Test
   )
 
   val `zio-config`: List[ModuleID] = List(
@@ -90,6 +97,7 @@ object Dependencies {
 
   val dependencies: List[ModuleID] =
     flyway ++
+      iron ++
       `java-jwt` ++
       javaMail ++
       logback ++
