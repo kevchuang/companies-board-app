@@ -6,11 +6,9 @@ import zio.*
 import io.github.iltotore.iron.*
 import sttp.tapir.server.ServerEndpoint
 
-class HealthController private extends HealthEndpoint:
-  def healthCheck: ServerEndpoint[Any, Task] =
-    healthEndpoint.serverLogicSuccess[Task](_ =>
-      ZIO.succeed(HealthCheckResponse("All good !"))
-    )
+class HealthController private:
+  def allGood: ZIO[Any, Nothing, HealthCheckResponse] =
+    ZIO.succeed(HealthCheckResponse("All good !"))
 end HealthController
 
 object HealthController:
