@@ -1,6 +1,5 @@
 package io.kevchuang.reviewboard.http.endpoints
 
-import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.ztapir.*
 import zio.*
 
