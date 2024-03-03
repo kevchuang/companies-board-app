@@ -2,7 +2,6 @@ package io.kevchuang.reviewboard.http.routes
 
 import io.kevchuang.reviewboard.http.endpoints.HealthEndpoint
 import io.kevchuang.reviewboard.services.health.HealthService
-import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.ztapir.*
 import zio.*
 
