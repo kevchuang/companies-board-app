@@ -9,7 +9,7 @@ import sttp.tapir.generic.auto.*
 import sttp.tapir.json.zio.{*, given}
 import zio.*
 
-final case class HealthEndpoint(health: HealthService)
+final case class HealthEndpoint()
     extends HttpEndpoint[HealthService, Unit, Unit, HealthCheckResponse]:
   def endpointDescription: ApiEndpoint[Unit, Unit, HealthCheckResponse] =
     endpoint
@@ -20,12 +20,11 @@ final case class HealthEndpoint(health: HealthService)
       .in("health")
       .out(jsonBody[HealthCheckResponse])
 
-  def endpointLogic: Unit => UIO[HealthCheckResponse] = _ => health.checkHealth
+  def endpointLogic: Unit => URIO[HealthService, HealthCheckResponse] = _ =>
+    HealthService.checkHealth
 end HealthEndpoint
 
 object HealthEndpoint:
-  def make: RIO[HealthService, HealthEndpoint] =
-    for health <- ZIO.service[HealthService]
-    yield HealthEndpoint(health)
-
+  def make: UIO[HealthEndpoint] =
+    ZIO.succeed(HealthEndpoint())
 end HealthEndpoint

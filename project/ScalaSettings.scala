@@ -18,6 +18,8 @@ object ScalaSettings {
     "-language:higherKinds",
     "-language:implicitConversions",
     "-unchecked",
-    "-deprecation"
+    "-deprecation",
+    "-Xmax-inlines",
+    "64"
   )
 }
